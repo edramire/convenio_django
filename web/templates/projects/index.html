@@ -1,0 +1,75 @@
+
+{% extends 'base_app.html' %}
+
+{% block title %}
+Projects
+{% endblock %}
+
+
+{% block body %}
+<div class="flex flex-col">
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+      <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+        <table class="divide-y divide-gray-200 table-fixed">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="w-1/2 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Project
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Budget
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Providers
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Deadline
+              </th>
+              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Laravel
+              </th>
+              <th scope="col" class="relative px-6 py-3">
+                <span class="sr-only">Actions</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            {% for project in projects %}
+            <tr>
+              <td class="px-6 py-4">
+                <div class="text-sm text-gray-900">{{ project.name }}</div>
+                <div class="text-sm text-gray-500">{{ project.code }}</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-500 ">
+                {{ project.budget }}
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-500 ">
+                {{ project.providers }}
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-500 ">
+                {{ project.deadline }}
+              </td>
+              <td class="px-6 py-4 ">
+                <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                  {{ project.laravel }}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                <a href="{% url 'project' project.id %}" class="text-teal-600 hover:text-teal-900">View</a>
+                |
+                <a href="{{project.link}}" class="text-teal-600 hover:text-teal-900">Link</a>
+                |
+                <a href="#" class="text-teal-600 hover:text-teal-900">Edit</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="bg-gray-100">
+  <div>
+    <div class="relative pb-32 overflow-hidden bg-sky-700" x-data="{menuOpen: false, profileOpen: false, menuSelected:'projects'}">
+      <!-- Menu open: "bg-sky-900", Menu closed: "bg-transparent" -->
+      <nav class="relative z-10 border-b border-teal-500 border-opacity-25 lg:bg-transparent lg:border-none" :class="{'bg-sky-900': menuOpen, 'bg-transparent': !menuOpen}">
+        <div class="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
+          <div class="relative flex items-center justify-between h-16 lg:border-b lg:border-sky-800">
+            <div class="flex items-center px-2 lg:px-0">
+              <div class="flex-shrink-0">
+                <img class="block w-auto h-8" src="https://tailwindui.com/img/logos/workflow-mark-teal-400.svg" alt="Workflow">
+              </div>
+              <div class="hidden lg:block lg:ml-6 lg:space-x-4">
+                <div class="flex">
+                  <!-- Current: "bg-black bg-opacity-25", Default: "hover:bg-sky-800" -->
+                  <a href="{% url 'projects' %}" class="px-3 py-2 text-sm font-medium text-white bg-black bg-opacity-25 rounded-md">Projects</a>
+
+                  {% comment %} <a href="#" class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-800">Jobs</a>
+                  <a href="#" class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-800">Applicants</a>
+                  <a href="#" class="px-3 py-2 text-sm font-medium text-white rounded-md hover:bg-sky-800">Company</a> {% endcomment %}
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-center flex-1 px-2 lg:ml-6 lg:justify-end">
+              <div class="w-full max-w-lg lg:max-w-xs">
+                <label for="search" class="sr-only">Search</label>
+                <div class="relative text-sky-100 focus-within:text-gray-400">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <!-- Heroicon name: solid/search -->
+                    <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <input id="search" name="search" class="block w-full py-2 pl-10 pr-3 leading-5 bg-opacity-50 border border-transparent rounded-md bg-sky-700 placeholder-sky-100 focus:outline-none focus:bg-white focus:ring-white focus:border-white focus:placeholder-gray-500 focus:text-gray-900 sm:text-sm" placeholder="Search" type="search">
+                </div>
+              </div>
+            </div>
+            <div class="flex lg:hidden">
+              <!-- Mobile menu button -->
+              <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-sky-200 hover:text-white hover:bg-sky-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false"
+              x-on:click="menuOpen=!menuOpen" x-cloak>
+                <span class="sr-only">Open main menu</span>
+                <svg :class="{'hidden': menuOpen, 'block': !menuOpen}" class="flex-shrink-0 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <svg :class="{'hidden': !menuOpen, 'block': menuOpen}" class="flex-shrink-0 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div class="hidden lg:block lg:ml-4">
+              <div class="flex items-center">
+                <button type="button" class="flex-shrink-0 p-1 rounded-full text-sky-200 hover:bg-sky-800 hover:text-white focus:outline-none focus:bg-sky-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-900 focus:ring-white">
+                  <span class="sr-only">View notifications</span>
+                  <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                  </svg>
+                </button>
+                <!-- Profile dropdown -->
+                <div x-cloak x-data="{profileOpen: false, activeIndex: 0}" @keydown.escape.stop="profileOpen = false" @click.away="profileOpen = false" class="relative flex-shrink-0 ml-4">
+                  <div>
+                    <button type="button" class="flex text-sm text-white rounded-full focus:outline-none focus:bg-sky-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-900 focus:ring-white" id="user-menu-button" x-ref="button" @click="profileOpen = !profileOpen" @keyup.space.prevent="profileOpen = true" @keydown.enter.prevent="profileOpen = true" aria-expanded="true" aria-haspopup="true" x-bind:aria-expanded="profileOpen.toString()" >
+                      <span class="sr-only">Open user menu</span>
+                      <img class="w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=320&amp;h=320&amp;q=80" alt="">
+                    </button>
+                  </div>
+
+                  <div x-show="profileOpen" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" @keydown.tab="profileOpen = false" @keydown.enter.prevent="profileOpen = false" @keyup.space.prevent="profileOpen = false">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" x-state:on="Active" x-state:off="Not Active" :class="{ 'bg-gray-100': activeIndex === 0 }" role="menuitem" tabindex="-1" id="user-menu-item-0" @mouseenter="activeIndex = 0" @mouseleave="activeIndex = -1">Your Profile</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" :class="{ 'bg-gray-100': activeIndex === 1 }" role="menuitem" tabindex="-1" id="user-menu-item-1" @mouseenter="activeIndex = 1" @mouseleave="activeIndex = -1">Settings</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" :class="{ 'bg-gray-100': activeIndex === 2 }" role="menuitem" tabindex="-1" id="user-menu-item-2" @mouseenter="activeIndex = 2" @mouseleave="activeIndex = -1">Sign out</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="bg-sky-900 lg:hidden" id="mobile-menu" x-show="menuOpen">
+          <div class="px-2 pt-2 pb-3 space-y-1">
+            <!-- Current: "bg-black bg-opacity-25", Default: "hover:bg-sky-800" -->
+
+            <a href="{% url 'projects' %}" class="block px-3 py-2 text-base font-medium text-white bg-black bg-opacity-25 rounded-md">Projects</a>
+
+            {% comment %} <a href="#" class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-800">Jobs</a>
+            <a href="#" class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-800">Applicants</a>
+            <a href="#" class="block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-sky-800">Company</a> {% endcomment %}
+          </div>
+          <div class="pt-4 pb-3 border-t border-sky-800">
+            <div class="flex items-center px-4">
+              <div class="flex-shrink-0">
+                <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80" alt="">
+              </div>
+              <div class="ml-3">
+                <div class="text-base font-medium text-white">Debbie Lewis</div>
+                <div class="text-sm font-medium text-sky-200">debbielewis@example.com</div>
+              </div>
+              <button type="button" class="flex-shrink-0 p-1 ml-auto rounded-full text-sky-200 hover:bg-sky-800 hover:text-white focus:outline-none focus:bg-sky-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-900 focus:ring-white">
+                <span class="sr-only">View notifications</span>
+                <!-- Heroicon name: outline/bell -->
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+              </button>
+            </div>
+            <div class="px-2 mt-3">
+              <a href="#" class="block px-3 py-2 text-base font-medium rounded-md text-sky-200 hover:text-white hover:bg-sky-800">Your Profile</a>
+
+              <a href="#" class="block px-3 py-2 text-base font-medium rounded-md text-sky-200 hover:text-white hover:bg-sky-800">Settings</a>
+
+              <a href="#" class="block px-3 py-2 text-base font-medium rounded-md text-sky-200 hover:text-white hover:bg-sky-800">Sign out</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- Menu open: "bottom-0", Menu closed: "inset-y-0" -->
+      <div class="absolute inset-x-0 inset-y-0 flex justify-center w-full overflow-hidden transform -translate-x-1/2 left-1/2 lg:inset-y-0" aria-hidden="true"
+      :class="{'bottom-0': menuOpen, 'inset-y-0': !menuOpen}"
+      >
+        <div class="flex-grow bg-opacity-75 bg-sky-900"></div>
+        <svg class="flex-shrink-0" width="1750" height="308" viewBox="0 0 1750 308" xmlns="http://www.w3.org/2000/svg">
+          <path opacity=".75" d="M1465.84 308L16.816 0H1750v308h-284.16z" fill="#075985" />
+          <path opacity=".75" d="M1733.19 0L284.161 308H0V0h1733.19z" fill="#0c4a6e" />
+        </svg>
+        <div class="flex-grow bg-opacity-75 bg-sky-800"></div>
+      </div>
+      {% comment %} {% block breadcrumb %}
+      {% include 'components/breadcrumb.html' with home={'label':'/'} %}
+      {% endblock %} {% endcomment %}
+
+      <header class="relative py-10">
+        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold text-white">
+            {% block title %}
+            {% endblock %}
+          </h1>
+
+          <p class="mt-3 text-xl font-bold text-gray-300">
+            {% block subtitle %}
+            {% endblock %}
+          </p>
+        </div>
+      </header>
+      <main class="relative">
+        <div class="max-w-screen-xl px-4 pb-6 mx-auto sm:px-6 lg:pb-16 lg:px-8">
+          <div class="overflow-hidden rounded-lg shadow">
+              {% block body %}
+              {% endblock %}
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+{% endblock %}
