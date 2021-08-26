@@ -38,7 +38,11 @@ Projects
             {% for project in projects %}
             <tr>
               <td class="px-6 py-4">
-                <div class="text-sm text-gray-900">{{ project.name }}</div>
+                <div class="text-sm text-gray-900">
+                <a href="{{project.link}}" class="text-teal-600 hover:text-teal-900">
+                {{ project.name }}
+                </a>
+                </div>
                 <div class="text-sm text-gray-500">{{ project.code }}</div>
               </td>
               <td class="px-6 py-4 text-sm text-gray-500 ">
@@ -51,16 +55,12 @@ Projects
                 {{ project.deadline }}
               </td>
               <td class="px-6 py-4 ">
-                <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full {% if project.laravel %}text-green-800 bg-green-100 {% else %} text-red-800 bg-red-100 {% endif %}">
                   {{ project.laravel }}
                 </span>
               </td>
               <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                 <a href="{% url 'project' project.id %}" class="text-teal-600 hover:text-teal-900">View</a>
-                |
-                <a href="{{project.link}}" class="text-teal-600 hover:text-teal-900">Link</a>
-                |
-                <a href="#" class="text-teal-600 hover:text-teal-900">Edit</a>
               </td>
             </tr>
             {% endfor %}

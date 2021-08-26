@@ -1,20 +1,20 @@
-# Importar módulos
 import requests
-import csv
 from bs4 import BeautifulSoup
 import re
 import time
 from random import random
-from web.models import Project
+from web.models import Project, Timeline, User
 
 def project_scrapping():
     seconds_sleep = 1
-
+    user = User.objects.get(pk=1)
     url = "https://conveniomarco.mercadopublico.cl/software/publicquotes/requestforquote/lists/?awarded_date=&limit=50&oc=&organization_name=&p=1&quote_id=&quote_name=&service_type=Desarrollo+y+Mantenci%C3%B3n+de+Software&status=1"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     rows = soup.select('#wk_mp_requestedquote_table > tbody > tr')
     data = []
+    count_created = 0
+    count_updated = 0
 
     for row in rows:
         data_row = {}
@@ -24,7 +24,6 @@ def project_scrapping():
         data_row['code'] = row.select('span.id')[0].get_text()
         data_row['link'] = row.select('a')[0]['href']
 
-        # detalle ...
         url_detalle = row.select('a')[0]['href']
         response_detalle = requests.get(url_detalle)
         soup_detalle = BeautifulSoup(response_detalle.text, 'html.parser')
@@ -34,12 +33,24 @@ def project_scrapping():
         data_row['deadline'] = soup_detalle.select("span.quote_infolabel")[3].get_text();
         data_row['laravel'] = len(soup_detalle.find_all(text=re.compile("(laravel|Laravel)"))) > 0
 
-        print(data_row)
         data.append(data_row)
+        code = data_row.pop('code')
+        project, created = Project.objects.update_or_create(**data_row, defaults={'code': code})
+        if created:
+            count_created += 1
+            project.timeline.create(user=user, status=1)
+        else:
+            count_updated += 1
+            project.timeline.create(user=user, status=2)
+
         time.sleep(random() * seconds_sleep)
 
-    # store data
-    projects = [Project(**item) for item in data]
-    Project.objects.bulk_create(projects)
+    # codes = [item['code'] for item in data]
+    # projects_db = Project.objects.in_bulk(codes, field_name='code')
+    # projects_new = [Project(**item) for item in data if not item.code in projects_db]
+
+    # Project.objects.bulk_create(projects_new)
+    # Project.objects.bulk_update(projects_db)
+    # print('Created: {0} | Updated: {1}'.format(count_created, count_updated))
 
     return data

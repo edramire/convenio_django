@@ -22,4 +22,5 @@ urlpatterns = [
     url(r"^", include("web.urls")),
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
+    path("unicorn/", include("django_unicorn.urls")),
 ]

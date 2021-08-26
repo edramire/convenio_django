@@ -1,31 +1,11 @@
-
-{% extends 'base_app.html' %}
-{% load unicorn %}
-
-{% block title %}
-View project
-{% endblock title %}
-
-{% block subtitle %}
-{{ project.code }}
-{% endblock subtitle %}
-
-{% block title_button %}
 <div>
-  <a href="{{project.link}}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-teal-500">
-    <svg class="w-5 h-5 mr-2 -ml-1 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-      <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
-    </svg>
-    View on website
-  </a>
-</div>
+  <section aria-labelledby="status-title" class="lg:col-start-3 lg:col-span-1">
+    <div class="px-4 py-5 bg-white shadow sm:rounded-lg sm:px-6">
+      <h2 id="status-title" class="text-lg font-medium text-gray-900">Status</h2>
 
-{% endblock title_button %}
+      <div class="px-4 py-5 border-t border-gray-200 sm:p-0"></div>
 
-{% block body %}
-<div class="grid grid-cols-12 gap-6 lg:grid-flow-col-dense">
-  <div class="col-span-8">
-    <section class="overflow-hidden bg-white shadow sm:rounded-lg">
+
       <div class="px-4 py-5 border-t border-gray-200 sm:p-0">
         <dl class="sm:divide-y sm:divide-gray-200">
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -33,7 +13,7 @@ View project
               Project Name
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              {{ project.name }}
+              {{ last_status.status_name }}
             </dd>
           </div>
           <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -82,16 +62,16 @@ View project
           </div>
         </dl>
       </div>
-    </section>
-    {% unicorn 'project_comments' project_id=project.id %}
 
-  </div>
-  <div class="col-span-4">
-    {% comment %} {% include 'projects/project_last_status.html' with project=project last_status=last_status %} {% endcomment %}
-    {% unicorn 'project_timeline' project_id=project.id %}
-  </div>
+      {% comment %} <div class="flex flex-col mt-6 justify-stretch" x-data="{open: false}">
+        <div x-on:open-status-modal="open=true; console.log('open-status-modal')">
+        <button type="button" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" x-on:click="$dispatch('open-status-modal');">
+          Change status
+        </button>
 
+        </div>
+
+      </div> {% endcomment %}
+    </div>
+  </section>
 </div>
-
-
-{% endblock body %}

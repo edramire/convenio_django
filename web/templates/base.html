@@ -1,7 +1,8 @@
-{% load static tailwind_tags %}
+{% load unicorn static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+    {% unicorn_scripts %}
     <title>Django Tailwind</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,8 @@
 	</head>
 
 	<body class="font-sans leading-normal tracking-normal bg-grey-lightest">
+    {% csrf_token %}
+
     {% block javascript %}
     {% endblock %}
 

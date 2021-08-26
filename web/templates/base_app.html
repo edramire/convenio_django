@@ -133,27 +133,30 @@
       {% endblock %} {% endcomment %}
 
       <header class="relative py-10">
-        <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="flex justify-between px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div>
           <h1 class="text-3xl font-bold text-white">
             {% block title %}
-            {% endblock %}
+            {% endblock title %}
           </h1>
 
           <p class="mt-3 text-xl font-bold text-gray-300">
             {% block subtitle %}
-            {% endblock %}
+            {% endblock subtitle %}
           </p>
         </div>
+        {% block title_button %}{% endblock title_button %}
+
       </header>
       <main class="relative">
         <div class="max-w-screen-xl px-4 pb-6 mx-auto sm:px-6 lg:pb-16 lg:px-8">
           <div class="overflow-hidden rounded-lg shadow">
               {% block body %}
-              {% endblock %}
+              {% endblock body %}
           </div>
         </div>
       </main>
     </div>
   </div>
 </div>
-{% endblock %}
+{% endblock content %}

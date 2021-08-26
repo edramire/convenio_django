@@ -1,8 +1,6 @@
 from django.db import models
-from web.services.project_scrapping import project_scrapping
-
 class ProjectManager(models.Manager):
-    def scrapping(self):
-        data = project_scrapping()
-        projects = [self.model(*item) for item in data]
-        self.bulk_create(projects)
+    def last_status(self, project_id: int):
+        queryset = self.get_queryset()
+        status = [item[0] for item in self.model.status_selectable]
+        return queryset.filter(project_id=project_id).filter(status__in=status).order_by('-created_at')[0]

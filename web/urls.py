@@ -9,6 +9,6 @@ urlpatterns = [
     url(r"^register/", views.register, name="register"),
     url(r"^projects/list/", views.projects, name="projects"),
     url(r"^projects/(?P<id>[0-9]+)/$", views.show_project, name="project"),
-    url(r"^projects/(?P<id>[0-9]+)/comments/create$", views.project_create_comment, name="project_create_comment"),
+    # url(r"^projects/(?P<id>[0-9]+)/comments/create$", views.project_create_comment, name="project_create_comment"),
     path('', RedirectView.as_view(url='/projects/list/', permanent=True)),
 ]
