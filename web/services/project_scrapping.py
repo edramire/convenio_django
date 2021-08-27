@@ -10,9 +10,11 @@ def project_scrapping():
     seconds_sleep = 1
     user = User.objects.get(pk=1)
     url = "https://conveniomarco.mercadopublico.cl/software/publicquotes/requestforquote/lists/?awarded_date=&limit=50&oc=&organization_name=&p=1&quote_id=&quote_name=&service_type=Desarrollo+y+Mantenci%C3%B3n+de+Software&status=1"
-    headers = generate_navigator()
-    headers = {k.title().replace('_','-'):v for k,v in headers.items()}
-
+    # headers = generate_navigator()
+    # headers = {k.title().replace('_','-'):v for k,v in headers.items()}
+    headers = {
+        'User-Agent': 'User-Agent' => "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
+    }
     response = requests.get(url,headers=headers)
     print(response.request.headers)
     soup = BeautifulSoup(response.text, 'html.parser')
