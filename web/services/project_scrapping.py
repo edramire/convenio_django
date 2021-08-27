@@ -13,7 +13,7 @@ def project_scrapping():
     # headers = generate_navigator()
     # headers = {k.title().replace('_','-'):v for k,v in headers.items()}
     headers = {
-        'User-Agent': 'User-Agent' => "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
+        'User-Agent': "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
     }
     response = requests.get(url,headers=headers)
     print(response.request.headers)
