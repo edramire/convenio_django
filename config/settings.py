@@ -132,8 +132,8 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = (
-    ('es', _('Español')),
-    ('en', _('English')),
+    ('es', 'Español'),
+    ('en', 'English'),
 )
 
 # Contains the path list where Django should look into for django.po files for all supported languages
