@@ -3,7 +3,7 @@ from .behaviors import Timestampable
 from django.db import models
 from django.contrib.auth.models import User
 from djmoney.models.fields import MoneyField
-from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
 
 # from model_utils.models import TimeStampedModel
 
@@ -16,14 +16,14 @@ from django.utils.translation import gettext_lazy as _
 
 class Project(Timestampable, models.Model):
     STATUS = (
-        (1, _('Publicada')),
-        (2, _('Publicación Cerrada')),
-        (3, _('En Evaluación')),
-        (4, _('Evaluación Cerrada')),
-        (5, _('Adjudicada')),
-        (6, _('Finalizada')),
-        (7, _('Desierta')),
-        (8, _('Desestimada')),
+        (1, 'Publicada'),
+        (2, 'Publicación Cerrada'),
+        (3, 'En Evaluación'),
+        (4, 'Evaluación Cerrada'),
+        (5, 'Adjudicada'),
+        (6, 'Finalizada'),
+        (7, 'Desierta'),
+        (8, 'Desestimada'),
     )
 
     """

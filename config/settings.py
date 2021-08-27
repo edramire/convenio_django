@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
 import moneyed
 import os
 import environ
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djmoney',
     'tailwind',
-    'translation_manager',
+    # 'translation_manager',
     # 'debug_toolbar',
     'django_unicorn',
 ]
