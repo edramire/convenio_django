@@ -4,12 +4,14 @@ import re
 import time
 from random import random
 from web.models import Project, Timeline, User
+from user_agent import generate_user_agent, generate_navigator
 
 def project_scrapping():
     seconds_sleep = 1
     user = User.objects.get(pk=1)
     url = "https://conveniomarco.mercadopublico.cl/software/publicquotes/requestforquote/lists/?awarded_date=&limit=50&oc=&organization_name=&p=1&quote_id=&quote_name=&service_type=Desarrollo+y+Mantenci%C3%B3n+de+Software&status=1"
-    response = requests.get(url)
+    headers = generate_navigator()
+    response = requests.get(url,headers=headers)
     soup = BeautifulSoup(response.text, 'html.parser')
     rows = soup.select('#wk_mp_requestedquote_table > tbody > tr')
     data = []
