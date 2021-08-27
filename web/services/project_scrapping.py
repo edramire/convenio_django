@@ -16,6 +16,10 @@ def project_scrapping():
     count_created = 0
     count_updated = 0
     print('Rows: {0}'.format(len(rows)))
+    if len(rows) == 0:
+        print(response.text)
+        return []
+
     for row in rows:
         data_row = {}
 
