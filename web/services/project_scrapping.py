@@ -15,7 +15,7 @@ def project_scrapping():
     data = []
     count_created = 0
     count_updated = 0
-
+    print('Rows: {0}'.format(len(rows)))
     for row in rows:
         data_row = {}
 
@@ -34,7 +34,11 @@ def project_scrapping():
         data_row['laravel'] = len(soup_detalle.find_all(text=re.compile("(laravel|Laravel)"))) > 0
 
         data.append(data_row)
+
         code = data_row.pop('code')
+
+        print('Adding project code {0}'.format(code))
+
         project, created = Project.objects.update_or_create(**data_row, defaults={'code': code})
         if created:
             count_created += 1
