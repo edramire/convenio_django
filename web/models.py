@@ -84,7 +84,6 @@ class Timeline(Timestampable, models.Model):
     def status_selectable():
         return Timeline.STATUS[2:]
 
-
 class Asignation(models.Model):
     timeline = models.ForeignKey(Timeline, on_delete=models.CASCADE, null=True, related_name='asignations')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='asignations')
@@ -95,5 +94,3 @@ class Tag(models.Model):
 
     def __str__(self):
         return "{0} - {1}".format(self.user, self.project)
-
-

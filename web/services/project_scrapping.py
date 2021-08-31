@@ -12,9 +12,19 @@ def project_scrapping():
     url = "https://conveniomarco.mercadopublico.cl/software/publicquotes/requestforquote/lists/?awarded_date=&limit=50&oc=&organization_name=&p=1&quote_id=&quote_name=&service_type=Desarrollo+y+Mantenci%C3%B3n+de+Software&status=1"
     # headers = generate_navigator()
     # headers = {k.title().replace('_','-'):v for k,v in headers.items()}
-    headers = {
-        'User-Agent': "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
+    # headers = {
+    #     'User-Agent': "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36",
+    #     'Accept-Language': 'es-cl',
+    # }
+    headers ={
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+        'Referrer': 'https://google.com',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Pragma': 'no-cache',
     }
+
     response = requests.get(url,headers=headers)
     print(response.request.headers)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -59,13 +69,5 @@ def project_scrapping():
             project.timeline.create(user=user, status=2)
 
         time.sleep(random() * seconds_sleep)
-
-    # codes = [item['code'] for item in data]
-    # projects_db = Project.objects.in_bulk(codes, field_name='code')
-    # projects_new = [Project(**item) for item in data if not item.code in projects_db]
-
-    # Project.objects.bulk_create(projects_new)
-    # Project.objects.bulk_update(projects_db)
-    # print('Created: {0} | Updated: {1}'.format(count_created, count_updated))
 
     return data

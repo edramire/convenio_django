@@ -1,0 +1,25 @@
+{% extends 'components/modal.html' %}
+
+{% block title %}
+Upload csv
+{% endblock title %}
+
+{% block body %}
+  <div class="mt-4" id="form-modal">
+  <form action="{% url 'project_import_csv' %}" method="POST" enctype="multipart/form-data" x-data="{csv_file:null}" >
+    {% csrf_token %}
+
+    <label for="csv_file" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:col-start-2 sm:text-sm">
+      Select file
+    </label>
+    <input id="csv_file" name="csv_file" x-model="csv_file" @change="console.log(csv_file)" type="file" class="hidden" />
+    {% comment %} <div x-show="csv_file" x-text="csv_file ? csv_file.split(/(\\|\/)/g).pop() : ''">
+    </div> {% endcomment %}
+
+    <button type="submit" :disabled="!csv_file" class="inline-flex justify-center w-full px-4 py-2 mt-4 text-base font-medium border border-transparent rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 sm:col-start-2 sm:text-sm" :class="{'focus:rignt-none hover:bg-transparent bg-gray-300 text-gray-700': !csv_file, 'text-white bg-teal-600 hover:bg-teal-700 focus:ring-teal-500': csv_file}">
+      Submit
+    </button>
+    </form>
+  </div>
+
+{% endblock body %}

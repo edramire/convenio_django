@@ -1,10 +1,36 @@
 
 {% extends 'base_app.html' %}
+{% load unicorn %}
 
 {% block title %}
 Projects
 {% endblock %}
 
+{% block title_button %}
+<div class="flex">
+  <form action="{% url 'project_export_csv' %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" name='import_csv' class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-teal-500">
+      Download csv
+    </button>
+  </form>
+  <div class="ml-4" x-data="{open: false}">
+    <div x-on:open-import-modal="open=true; console.log('open-import-modal')">
+      <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-teal-500" x-on:click="$dispatch('open-import-modal');">
+        Upload csv
+      </button>
+      {% include 'projects/project_import_modal.html'%}
+    </div>
+  </div>
+
+  {% comment %} <form action="{% url 'project_upload_csv' %}" method="POST" class="ml-4">
+    {% csrf_token %}
+    <button type="submit" name='import_csv' class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-teal-500">
+      Import csv
+    </button>
+  </form> {% endcomment %}
+</div>
+{% endblock title_button %}
 
 {% block body %}
 <div class="flex flex-col">

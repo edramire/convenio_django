@@ -1,0 +1,25 @@
+{% extends 'components/modal.html' %}
+
+{% block title %}
+Upload csv
+{% endblock title %}
+
+{% block body %}
+  <div class="mt-4" id="form-modal">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">File</label>
+      <label for="file_upload" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-teal-500">
+        Upload file
+      </label>
+      <input id="file_upload" type="file" class="hidden" unicorn:model="file_upload"/>
+    </div>
+  </div>
+
+{% endblock body %}
+
+{% block footer %}
+<button @click="open = false" unicorn:click="submit_csv" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:col-start-2 sm:text-sm">
+  Submit
+</button>
+
+{% endblock footer %}
