@@ -155,7 +155,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'web/static/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_REDIRECT_URL = "/projects/list/"
 
 EMAIL_HOST = "localhost"
 EMAIL_PORT = 1025
@@ -197,3 +197,5 @@ INTERNAL_IPS = [
 #         },
 #     },
 # }
+
+LOGIN_URL="/login"

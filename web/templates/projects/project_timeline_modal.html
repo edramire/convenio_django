@@ -19,10 +19,10 @@ Update project status
 
     <div class="mt-4">
       <label for="observation">Observation</label>
-      <textarea unicorn:model.defer="observation" id="observation" name="observation" rows="3" class="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm" placeholder="Add a timeline"></textarea>
+      <textarea unicorn:model.defer="observation" id="observation" name="observation" rows="3" class="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm" placeholder="Add an observation"></textarea>
     </div>
 
-    {% if status_selected == '3' %}
+    {% if status_selected == '2' %}
     <div class="mt-4">
       <label for="observation">Assigned users</label>
       <select multiple unicorn:model="users_selected" id="assigned" name="assigned" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">

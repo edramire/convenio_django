@@ -50,7 +50,10 @@ class Project(Timestampable, models.Model):
         return self.timeline.order_by('-created_at').select_related('asignations').first()
     def last_status(self):
         status = [item[0] for item in Timeline.status_selectable()]
-        return self.timeline.filter(status__in=status).order_by('-created_at').first()
+        res = self.timeline.filter(status__in=status).order_by('-created_at').first()
+        if not res:
+            res = self.timeline.order_by('-created_at').first()
+        return res
 
 class Comment(Timestampable, models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='comments')
@@ -64,7 +67,7 @@ class Timeline(Timestampable, models.Model):
     STATUS = [
         (1, 'Descargada'),
         (2, 'Actualizada'),
-        (3, 'Rechazada'),
+        (3, 'Descartada'),
         (4, 'Asignada'),
         (5, 'Postulada'),
     ]

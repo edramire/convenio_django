@@ -69,9 +69,12 @@
                   </div>
 
                   <div x-show="profileOpen" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" x-ref="menu-items" x-description="Dropdown menu, show/hide based on menu state." role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" @keydown.tab="profileOpen = false" @keydown.enter.prevent="profileOpen = false" @keyup.space.prevent="profileOpen = false">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" x-state:on="Active" x-state:off="Not Active" :class="{ 'bg-gray-100': activeIndex === 0 }" role="menuitem" tabindex="-1" id="user-menu-item-0" @mouseenter="activeIndex = 0" @mouseleave="activeIndex = -1">Your Profile</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" :class="{ 'bg-gray-100': activeIndex === 1 }" role="menuitem" tabindex="-1" id="user-menu-item-1" @mouseenter="activeIndex = 1" @mouseleave="activeIndex = -1">Settings</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" :class="{ 'bg-gray-100': activeIndex === 2 }" role="menuitem" tabindex="-1" id="user-menu-item-2" @mouseenter="activeIndex = 2" @mouseleave="activeIndex = -1">Sign out</a>
+                    <div class="block px-4 py-2 text-sm text-gray-700">
+                      <div class="text-base font-medium text-gray-700">{{ user.username }}</div>
+                      <div class="text-sm font-medium text-gray-400">{{ user.email }}</div>
+                    </div>
+
+                    <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-700" :class="{ 'bg-gray-100': activeIndex === 2 }" role="menuitem" tabindex="-1" id="user-menu-item-2" @mouseenter="activeIndex = 2" @mouseleave="activeIndex = -1">Sign out</a>
                   </div>
                 </div>
               </div>
@@ -96,8 +99,8 @@
                 <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80" alt="">
               </div>
               <div class="ml-3">
-                <div class="text-base font-medium text-white">Debbie Lewis</div>
-                <div class="text-sm font-medium text-sky-200">debbielewis@example.com</div>
+                <div class="text-base font-medium text-white">{{ user.username }}</div>
+                <div class="text-sm font-medium text-sky-200">{{ user.email }}</div>
               </div>
               <button type="button" class="flex-shrink-0 p-1 ml-auto rounded-full text-sky-200 hover:bg-sky-800 hover:text-white focus:outline-none focus:bg-sky-900 focus:ring-2 focus:ring-offset-2 focus:ring-offset-sky-900 focus:ring-white">
                 <span class="sr-only">View notifications</span>
@@ -108,11 +111,7 @@
               </button>
             </div>
             <div class="px-2 mt-3">
-              <a href="#" class="block px-3 py-2 text-base font-medium rounded-md text-sky-200 hover:text-white hover:bg-sky-800">Your Profile</a>
-
-              <a href="#" class="block px-3 py-2 text-base font-medium rounded-md text-sky-200 hover:text-white hover:bg-sky-800">Settings</a>
-
-              <a href="#" class="block px-3 py-2 text-base font-medium rounded-md text-sky-200 hover:text-white hover:bg-sky-800">Sign out</a>
+              <a href="{% url 'logout' %}" class="block px-3 py-2 text-base font-medium rounded-md text-sky-200 hover:text-white hover:bg-sky-800">Sign out</a>
             </div>
           </div>
         </div>

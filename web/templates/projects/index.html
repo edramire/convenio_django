@@ -23,12 +23,6 @@ Projects
     </div>
   </div>
 
-  {% comment %} <form action="{% url 'project_upload_csv' %}" method="POST" class="ml-4">
-    {% csrf_token %}
-    <button type="submit" name='import_csv' class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-teal-800 focus:ring-teal-500">
-      Import csv
-    </button>
-  </form> {% endcomment %}
 </div>
 {% endblock title_button %}
 
@@ -40,22 +34,28 @@ Projects
         <table class="divide-y divide-gray-200 table-fixed">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="w-1/2 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-1/3 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Project
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-1/3 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Budget
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-1/3 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Providers
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-1/3 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Deadline
               </th>
-              <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              <th scope="col" class="w-1/3 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Laravel
               </th>
-              <th scope="col" class="relative px-6 py-3">
+              <th scope="col" class="w-1/3 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Status
+              </th>
+              <th scope="col" class="w-1/3 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                Comments
+              </th>
+              <th scope="col" class="relative w-1/3 px-6 py-3">
                 <span class="sr-only">Actions</span>
               </th>
             </tr>
@@ -77,14 +77,34 @@ Projects
               <td class="px-6 py-4 text-sm text-gray-500 ">
                 {{ project.providers }}
               </td>
-              <td class="px-6 py-4 text-sm text-gray-500 ">
-                {{ project.deadline }}
+              <td class="w-20 px-6 py-4 text-sm text-gray-500">
+                {{ project.deadline | date:'d-m-Y' }}
               </td>
               <td class="px-6 py-4 ">
                 <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full {% if project.laravel %}text-green-800 bg-green-100 {% else %} text-red-800 bg-red-100 {% endif %}">
                   {{ project.laravel }}
                 </span>
               </td>
+
+              <td class="px-6 py-4 ">
+                <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full
+                {% if project.last_status.status == 1 or project.last_status.status == 2 %}
+                text-gray-600 bg-gray-100
+                {% elif project.last_status.status == 4 %}
+                text-blue-800 bg-blue-100
+                {% elif project.last_status.status == 5 %}
+                text-green-800 bg-green-100
+                {% elif project.last_status.status == 3 %}
+                text-red-800 bg-red-100
+                {% endif %}
+                ">
+                  {{ project.last_status.status_name }}
+                </span>
+              </td>
+              <td class="px-6 py-4 ">
+              {{ project.comments.count }}
+              </td>
+
               <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                 <a href="{% url 'project' project.id %}" class="text-teal-600 hover:text-teal-900">View</a>
               </td>

@@ -5,8 +5,9 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     url(r"^accounts/", include("django.contrib.auth.urls")),
-    url(r"^dashboard/", views.dashboard, name="dashboard"),
-    url(r"^register/", views.register, name="register"),
+    url(r"^login/", views.login, name="login"),
+    url(r"^logout/", views.logout, name="logout"),
+
     url(r"^projects/list/", views.projects, name="projects"),
     url(r"^projects/(?P<id>[0-9]+)/$", views.show_project, name="project"),
     # url(r"^projects/(?P<id>[0-9]+)/comments/create$", views.project_create_comment, name="project_create_comment"),
