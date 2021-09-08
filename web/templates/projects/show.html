@@ -87,8 +87,14 @@ View project
 
   </div>
   <div class="col-span-4">
-    {% comment %} {% include 'projects/project_last_status.html' with project=project last_status=last_status %} {% endcomment %}
-    {% unicorn 'project_timeline' project_id=project.id %}
+    {% comment %} <div>
+      {% include 'projects/project_last_status.html' with project=project last_status=last_status %}
+    </div> {% endcomment %}
+    <div class="">
+      {% comment %} {% unicorn 'project_timeline' project_id=project.id %} {% endcomment %}
+      {% unicorn 'project_timeline' project_id=project.id %}
+    </div>
+    {% comment %} {% unicorn 'project_last_status.html' project_id=project.id %} {% endcomment %}
   </div>
 
 </div>

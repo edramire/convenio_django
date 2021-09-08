@@ -12,7 +12,7 @@ Upload csv
     <label for="csv_file" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:col-start-2 sm:text-sm">
       Select file
     </label>
-    <input id="csv_file" name="csv_file" x-model="csv_file" @change="console.log(csv_file)" type="file" class="hidden" />
+    <input id="csv_file" name="csv_file" x-model="csv_file" type="file" class="hidden" />
     {% comment %} <div x-show="csv_file" x-text="csv_file ? csv_file.split(/(\\|\/)/g).pop() : ''">
     </div> {% endcomment %}
 
