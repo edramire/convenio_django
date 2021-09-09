@@ -13,7 +13,7 @@ class ProjectCommentsView(UnicornView):
         self.comments = Comment.objects.filter(project__pk=self.project_id)
 
     def submit_comment(self):
-        user_id = 1
+        user_id = self.request.user.id
         newComment = Comment.objects.create(comment=self.comment_text, project_id=self.project_id, user_id=user_id)
         self.comments = Comment.objects.filter(project__pk=self.project_id)
         self.comment_text = ""
