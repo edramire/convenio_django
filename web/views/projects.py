@@ -9,10 +9,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login/')
 def projects(request):
-    context = {
-        'projects': Project.objects.prefetch_related('comments').order_by('deadline')
-    }
-    return render(request, "projects/index.html", context)
+    return render(request, "projects/index.html")
 
 @login_required
 def project_export_csv(request):

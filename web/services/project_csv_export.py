@@ -7,7 +7,7 @@ from django.http import HttpResponse
 def project_csv_export(response, queryset):
     model = queryset.model
     model_fields = model._meta.fields + model._meta.many_to_many
-    field_names = [field.name for field in model_fields]
+    field_names = [field.name for field in model_fields if field != 'id']
 
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="project-export.csv"'

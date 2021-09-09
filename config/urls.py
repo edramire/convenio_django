@@ -20,6 +20,7 @@ import debug_toolbar
 
 urlpatterns = [
     url(r"^", include("web.urls")),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
     path("unicorn/", include("django_unicorn.urls")),

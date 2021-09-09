@@ -1,0 +1,130 @@
+{% load timeuntil_es %}
+
+<div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+  <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+    <div class="flex mb-4">
+
+      <select unicorn:model="deadline" id="deadline" name="deadline" class="block py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md w-50 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+        {% for key, value in deadlines_all %}
+        <option value="{{ key }}">
+          {{ value }}
+        </option>
+        {% endfor %}
+      </select>
+
+      <select unicorn:model="status_project" id="status_project" name="status_project" class="block py-2 pl-3 pr-10 mt-1 ml-4 text-base border-gray-300 rounded-md w-50 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+        <option value="all">Con todos los estados</option>
+
+        {% for key, value in status_project_all %}
+        <option value="{{ key }}">
+          {{ value }}
+        </option>
+        {% endfor %}
+      </select>
+
+
+      <select unicorn:model="status_timeline" id="status_timeline" name="status_timeline" class="block py-2 pl-3 pr-10 mt-1 ml-4 text-base border-gray-300 rounded-md w-50 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+        {% for key, value in status_timeline_all %}
+        <option value="{{ key }}">
+          {{ value }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+      {% if projects|length == 0 %}
+      <div class="flex items-center justify-center w-full bg-white h-80">
+        <div class="text-gray-500">
+          No hay proyectos disponibles con este criterio
+        </div>
+      </div>
+      {% else %}
+
+      <table class="divide-y divide-gray-200 table-fixed">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              Project
+            </th>
+            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              Budget
+            </th>
+            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              Providers
+            </th>
+            <th scope="col" class="w-40 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              Deadline
+            </th>
+            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              Laravel
+            </th>
+            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              Status
+            </th>
+            <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+              Comments
+            </th>
+            <th scope="col" class="relative w-4">
+              <span class="sr-only">Actions</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          {% for project in projects %}
+          <tr>
+            <td class="px-6 py-4">
+              <div class="text-sm text-gray-900">
+              <a href="{{project.link}}" class="text-teal-600 hover:text-teal-900">
+              {{ project.name }}
+              </a>
+              </div>
+              <div class="text-sm text-gray-500">{{ project.code }}</div>
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-500 ">
+              {{ project.budget }}
+            </td>
+            <td class="px-6 py-4 text-sm text-gray-500 ">
+              {{ project.providers }}
+            </td>
+            <td class="w-20 px-6 py-4 text-sm text-gray-500">
+              {{ project.deadline | date:'d-m-Y' }}<br>
+              {{ project.deadline | timeuntil_es }}
+            </td>
+            <td class="px-6 py-4 ">
+              <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full {% if project.laravel %}text-green-800 bg-green-100 {% else %} text-red-800 bg-red-100 {% endif %}">
+                {{ project.laravel }}
+              </span>
+            </td>
+
+            <td class="px-6 py-4 ">
+              <span class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full
+              {% if project.last_status.status == 1 or project.last_status.status == 2 %}
+              text-gray-600 bg-gray-100
+              {% elif project.last_status.status == 4 %}
+              text-blue-800 bg-blue-100
+              {% elif project.last_status.status == 5 %}
+              text-green-800 bg-green-100
+              {% elif project.last_status.status == 3 %}
+              text-red-800 bg-red-100
+              {% endif %}
+              ">
+                {{ project.last_status.status_name }}
+              </span>
+            </td>
+            <td class="px-6 py-4 ">
+            {{ project.comments.count }}
+            </td>
+
+            <td class="py-4 pr-6 text-sm font-medium text-right whitespace-nowrap">
+              <a href="{% url 'project_show' project.id %}" class="text-teal-600 hover:text-teal-900">View</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+
+      </table>
+      {% endif %}
+    </div>
+  </div>
+</div>

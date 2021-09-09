@@ -3,6 +3,9 @@ from .behaviors import Timestampable
 from django.db import models
 from django.contrib.auth.models import User
 from djmoney.models.fields import MoneyField
+
+from datetime import datetime
+
 # from django.utils.translation import gettext_lazy as _
 
 # from model_utils.models import TimeStampedModel
@@ -48,6 +51,7 @@ class Project(Timestampable, models.Model):
 
     def last_timeline(self):
         return self.timeline.order_by('-created_at').select_related('asignations').first()
+
     def last_status(self):
         status = [item[0] for item in Timeline.status_selectable()]
         res = self.timeline.filter(status__in=status).order_by('-created_at').first()
