@@ -46,25 +46,25 @@
         <thead class="bg-gray-50">
           <tr>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Project
+              {% trans "Project" %}
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Budget
+              {% trans "Budget" %}
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Providers
+              {% trans "Providers" %}
             </th>
             <th scope="col" class="w-40 px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Deadline
+              {% trans "Deadline" %}
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Laravel
+              {% trans "Laravel" %}
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Status
+              {% trans "Status" %}
             </th>
             <th scope="col" class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-              Comments
+              {% trans "Comments" %}
             </th>
             <th scope="col" class="relative w-4">
               <span class="sr-only">Actions</span>
@@ -118,7 +118,7 @@
             </td>
 
             <td class="py-4 pr-6 text-sm font-medium text-right whitespace-nowrap">
-              <a href="{% url 'project_show' project.id %}" class="text-teal-600 hover:text-teal-900">View</a>
+              <a href="{% url 'project_show' project.id %}" class="text-teal-600 hover:text-teal-900">{% trans "View" %}</a>
             </td>
           </tr>
           {% endfor %}

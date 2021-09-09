@@ -1,13 +1,16 @@
 {% extends 'components/modal.html' %}
+{% load i18n %}
 
 {% block title %}
-Update project status
+{% trans "Update project status" %}
 {% endblock title %}
 
 {% block body %}
   <div class="mt-4" id="form-modal">
     <div>
-      <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+      <label for="status" class="block text-sm font-medium text-gray-700">
+      {% trans "Status" %}
+      </label>
       <select unicorn:model="status_selected" unicorn:partial="form-modal" id="status" name="status" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
         {% for key, value in status_all %}
         <option value="{{ key }}">
@@ -18,13 +21,13 @@ Update project status
     </div>
 
     <div class="mt-4">
-      <label for="observations">Observations</label>
-      <textarea unicorn:model.defer="observations" id="observations" name="observations" rows="3" class="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm" placeholder="Add an observation"></textarea>
+      <label for="observations" class="block text-sm font-medium text-gray-700">{% trans "Observations" %}</label>
+      <textarea unicorn:model.defer="observations" id="observations" name="observations" rows="3" class="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-teal-500 focus:border-teal-500 sm:text-sm" placeholder="{% trans 'Add an observation' %}"></textarea>
     </div>
 
     {% if status_selected == '4' %}
     <div class="mt-4">
-      <label for="observation">Assigned users</label>
+      <label for="observation" class="block text-sm font-medium text-gray-700"> {% trans "Assigned users" %} </label>
       <select multiple unicorn:model="users_selected" id="assigned" name="assigned" class="block w-full py-2 pl-3 pr-10 mt-1 text-base border-gray-300 rounded-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
         {% for key, value in users_all %}
         <option value="{{ key }}"
@@ -44,7 +47,7 @@ Update project status
 
 {% block footer %}
 <button x-on:click="open=false" unicorn:click="submit_status" class="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-teal-600 border border-transparent rounded-md shadow-sm hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:col-start-2 sm:text-sm">
-  Update
+  {% trans "Update" %}
 </button>
 
 {% endblock footer %}

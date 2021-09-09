@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -141,9 +142,14 @@ LANGUAGES = (
 )
 
 # Contains the path list where Django should look into for django.po files for all supported languages
-LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
-)
+# LOCALE_PATHS = (
+#     os.path.join(BASE_DIR, 'locale'),
+# )
+
+LANGUAGE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),  # base folder where manage.py resides
+    os.path.join(BASE_DIR, 'web/locale')  # app folder
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

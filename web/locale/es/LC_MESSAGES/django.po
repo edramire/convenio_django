@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-17 00:01-0400\n"
+"POT-Creation-Date: 2021-09-09 00:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,34 +18,118 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: models.py:20
-msgid "Publicada"
-msgstr ""
+#: web/templates/projects/index.html:7
+#, fuzzy
+#| msgid "Project"
+msgid "Projects"
+msgstr "Proyectos"
 
-#: models.py:21
-msgid "Publicación Cerrada"
-msgstr ""
+#: web/templates/projects/index.html:15
+msgid "Download csv"
+msgstr "Descargar archivo"
 
-#: models.py:22
-msgid "En Evaluación"
-msgstr ""
+#: web/templates/projects/index.html:21
+msgid "Upload csv"
+msgstr "Subir archivo"
 
-#: models.py:23
-msgid "Evaluación Cerrada"
-msgstr ""
+#: web/templates/projects/project_timeline_modal.html:5
+msgid "Update project status"
+msgstr "Modificar estado del proyecto"
 
-#: models.py:24
-msgid "Adjudicada"
-msgstr ""
+#: web/templates/projects/project_timeline_modal.html:12
+#: web/templates/unicorn/project_list.html:64
+msgid "Status"
+msgstr "Estado"
 
-#: models.py:25
-msgid "Finalizada"
-msgstr ""
+#: web/templates/projects/project_timeline_modal.html:24
+msgid "Observations"
+msgstr "Observaciones"
 
-#: models.py:26
-msgid "Desierta"
-msgstr ""
+#: web/templates/projects/project_timeline_modal.html:25
+msgid "Add an observation"
+msgstr "Agregar una observación"
 
-#: models.py:27
-msgid "Desestimada"
-msgstr ""
+#: web/templates/projects/project_timeline_modal.html:30
+msgid "Assigned users"
+msgstr "Usuarios asignados"
+
+#: web/templates/projects/project_timeline_modal.html:50
+msgid "Update"
+msgstr "Actualizar"
+
+#: web/templates/projects/show.html:7
+#, fuzzy
+#| msgid "Project"
+msgid "View project"
+msgstr "Ver Proyecto"
+
+#: web/templates/projects/show.html:20
+msgid "View on website"
+msgstr "Ver en sitio web"
+
+#: web/templates/projects/show.html:34
+#, fuzzy
+#| msgid "Project"
+msgid "Project Name"
+msgstr "Nombre de Proyecto"
+
+#: web/templates/projects/show.html:42
+msgid "Code"
+msgstr "Código"
+
+#: web/templates/projects/show.html:50
+#: web/templates/unicorn/project_list.html:52
+msgid "Budget"
+msgstr "Presupuesto"
+
+#: web/templates/projects/show.html:58
+#: web/templates/unicorn/project_list.html:55
+msgid "Providers"
+msgstr "Proveedores"
+
+#: web/templates/projects/show.html:66
+#: web/templates/unicorn/project_list.html:58
+msgid "Deadline"
+msgstr "Fecha límite"
+
+#: web/templates/projects/show.html:74
+#: web/templates/unicorn/project_list.html:61
+msgid "Laravel"
+msgstr "Laravel"
+
+#: web/templates/unicorn/project_comments.html:7
+#: web/templates/unicorn/project_list.html:67
+msgid "Comments"
+msgstr "Comentarios"
+
+#: web/templates/unicorn/project_comments.html:35
+msgid "There are not comments yet"
+msgstr "Aún no hay comentarios"
+
+#: web/templates/unicorn/project_comments.html:50
+msgid "Add a note"
+msgstr "Agrega un comentario"
+
+#: web/templates/unicorn/project_comments.html:60
+msgid "Comment"
+msgstr "Comentar"
+
+#: web/templates/unicorn/project_list.html:49
+msgid "Project"
+msgstr "Proyecto"
+
+#: web/templates/unicorn/project_list.html:121
+msgid "View"
+msgstr "Ver"
+
+#: web/templates/unicorn/project_timeline.html:7
+msgid "Timeline"
+msgstr "Linea de tiempo"
+
+#: web/templates/unicorn/project_timeline.html:11
+msgid "Change status"
+msgstr "Modificar estado"
+
+#: web/templates/unicorn/project_timeline.html:60
+msgid "by"
+msgstr "por"

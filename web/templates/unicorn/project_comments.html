@@ -1,8 +1,10 @@
+{% load i18n %}
+
 <section aria-labelledby="notes-title" class="mt-10">
   <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
     <div class="divide-y divide-gray-200">
       <div class="px-4 py-5 sm:px-6">
-        <h2 id="notes-title" class="text-lg font-medium text-gray-900">Comments</h2>
+        <h2 id="notes-title" class="text-lg font-medium text-gray-900">{% trans "Comments" %} </h2>
       </div>
       <div class="px-4 py-6 sm:px-6">
         <ul role="list" class="space-y-8" id="comment-list">
@@ -29,7 +31,7 @@
           </li>
           {% empty %}
           <li id="comment-none">
-            There are not comments yet.
+            {% trans "There are not comments yet" %}.
           </li>
           {% endfor %}
         </ul>
@@ -44,7 +46,7 @@
           <form>
             <div>
               <label for="comment_text" class="sr-only">Comment</label>
-              <textarea unicorn:model.defer="comment_text" id="comment_text" name="comment_text" rows="3" class="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Add a note"></textarea>
+              <textarea unicorn:model.defer="comment_text" id="comment_text" name="comment_text" rows="3" class="block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="{% trans "Add a note" %}"></textarea>
             </div>
             <div class="flex items-center justify-between mt-3">
               <a href="#" class="inline-flex items-start space-x-2 text-sm text-gray-500 group hover:text-gray-900">
@@ -54,7 +56,7 @@
                 </svg>
               </a>
               <button unicorn:click.prevent="submit_comment" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Comment
+                {% trans "Comment" %}
               </button>
             </div>
           </form>

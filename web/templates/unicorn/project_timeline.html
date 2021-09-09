@@ -1,11 +1,14 @@
+{% load i18n %}
 <div>
   <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
     <div class="px-4 py-5 bg-white shadow sm:rounded-lg sm:px-6">
       <div class="flex flex-row justify-between">
-        <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Timeline</h2>
+        <h2 id="timeline-title" class="text-lg font-medium text-gray-900">
+        {% trans "Timeline" %}
+        </h2>
         <div class="" x-data="{open: false}">
           <button type="button" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white border border-transparent rounded-md shadow-sm bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" x-on:click="open=true">
-            Change status
+            {% trans "Change status" %}
           </button>
           {% include 'projects/project_timeline_modal.html'%}
         </div>
@@ -24,7 +27,6 @@
               {% endif %}
               <div class="relative flex space-x-3">
                 <div>
-
                   {% if item.status == 1 or item.status == 2 %}
                   <span class="flex items-center justify-center w-8 h-8 bg-gray-400 rounded-full ring-8 ring-white">
                     <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -55,13 +57,12 @@
                 <div class="min-w-0 flex-1 pt-1.5 space-x-4">
                 <div class="flex justify-between">
                   <div>
-                    <p class="text-sm text-gray-500">{{ item.status_name }} by <span class="font-medium text-gray-900">{{ item.user.username }}</span></p>
+                    <p class="text-sm text-gray-500">{{ item.status_name }} {% trans "by" %} <span class="font-medium text-gray-900">{{ item.user.username }}</span></p>
                   </div>
                   <div class="text-sm text-right text-gray-500 whitespace-nowrap">
                     <time datetime="2020-09-20">{{ item.created_at | date:'d-m-Y' }}</time>
                   </div>
                 </div>
-                {% comment %} comments {% endcomment %}
                 {% if item.comment %}
                 <div class="mt-2 text-sm text-gray-700">
                   <p>
